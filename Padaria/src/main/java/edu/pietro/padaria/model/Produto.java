@@ -9,10 +9,10 @@ public class Produto {
     private String descricao;
     private double preco;
     
-    @Override
-    public String toString(){
+    @Override  public String toString(){
         return this.codigo +"-"+ this.descricao;
     }
+  
     public Produto(){};
     public Produto(int codigo, String descricao) {
         this.codigo = codigo;

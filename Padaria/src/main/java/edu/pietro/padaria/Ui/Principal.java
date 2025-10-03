@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package edu.pietro.padaria.Interface;
+package edu.pietro.padaria.Ui;
 
 import edu.pietro.padaria.model.Produto;
+import edu.pietro.padaria.model.ProdutoVenda;
 import edu.pietro.padaria.service.ProdutoService;
 import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
  *
- * @author Guilherme
+ * @author Pietro
  */
 public class Principal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Principal.class.getName());
     List<Produto> produtos;
-    DefaultListModel<Produto> listaCarrinho;
+    DefaultListModel<ProdutoVenda> listaCarrinho;
     
     /**
      * Creates new form Principal
@@ -72,20 +73,22 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        bAdiciona = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jComboBox1 = new javax.swing.JComboBox<>();
         jSpinner1 = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        bRemove = new javax.swing.JButton();
+        tTotal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bAdiciona.setText("Adiciona");
+        bAdiciona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bAdicionaActionPerformed(evt);
             }
         });
 
@@ -103,6 +106,13 @@ public class Principal extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jList1);
 
+        bRemove.setText("Remove");
+        bRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,12 +123,15 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bAdiciona)
+                    .addComponent(bRemove))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(tTotal))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,45 +140,55 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(bAdiciona))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bRemove))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAdicionaActionPerformed
         // TODO add your handling code here:
-        double Total = ((Produto)jComboBox1.getSelectedItem()
-                            ).getPreco()
-                       * Integer.parseInt(jSpinner1
-                            .getValue()
-                            .toString()); 
-        jTextArea1.append(
-                jSpinner1.getValue().toString()
-                        + "x " 
-                        + jComboBox1
-                            .getSelectedItem()
-                            .toString()
-                        + " = "
-                        + Total);                  
-        jTextArea1.append("\n");
+    Produto produtoSelecionado = (Produto) jComboBox1.getSelectedItem();
+    int quantidade = (Integer) jSpinner1.getValue();
+    double total = produtoSelecionado.getPreco() * quantidade;
+
+    ProdutoVenda produtoVenda = new ProdutoVenda();
+    produtoVenda.setProduto(produtoSelecionado);
+    produtoVenda.setQuantidade(quantidade);
+    produtoVenda.setTotal(total);
+
+    listaCarrinho.addElement(produtoVenda);
+    
+    tTotal.setText("TOTAL");
+
+    jTextArea1.append(produtoVenda.toString() + "\n");
         
-    listaCarrinho.addElement(((Produto)jComboBox1.getSelectedItem()
-                            ));
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bAdicionaActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void bRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveActionPerformed
+        // TODO add your handling code here:
+         if(jList1.getSelectedIndex() >= 0)
+            listaCarrinho.removeElementAt(
+                    jList1.getSelectedIndex()
+            );
+    }//GEN-LAST:event_bRemoveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,12 +216,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bAdiciona;
+    private javax.swing.JButton bRemove;
     private javax.swing.JComboBox<Produto> jComboBox1;
-    private javax.swing.JList<Produto> jList1;
+    private javax.swing.JList<ProdutoVenda> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField tTotal;
     // End of variables declaration//GEN-END:variables
 }
