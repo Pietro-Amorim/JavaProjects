@@ -12,6 +12,7 @@ public class ProdutoVenda {
     private Produto produto;
     private int quantidade;
     private double total;
+    private int SaldoEstoque;
     
     @Override
     public String toString() {
@@ -45,6 +46,7 @@ public class ProdutoVenda {
     public void setTotal(double total) {
         this.total = total;
     }
+    
 
 
 

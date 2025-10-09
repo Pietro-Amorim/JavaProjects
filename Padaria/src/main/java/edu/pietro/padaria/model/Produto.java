@@ -55,5 +55,9 @@ public class Produto {
         return this.codigo == ((Produto)obj).codigo;
     }
 
+    public void setSaldoEstoque(int nextInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }

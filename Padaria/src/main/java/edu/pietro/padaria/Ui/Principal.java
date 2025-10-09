@@ -82,6 +82,8 @@ public class Principal extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         bRemove = new javax.swing.JButton();
         tTotal = new javax.swing.JTextField();
+        Saldo = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,15 +115,23 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        Saldo.setText("Saldo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(Saldo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bAdiciona)
@@ -136,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,8 +161,10 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bRemove))
-                .addContainerGap(108, Short.MAX_VALUE))
+                    .addComponent(bRemove)
+                    .addComponent(Saldo)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,7 +183,11 @@ public class Principal extends javax.swing.JFrame {
 
     listaCarrinho.addElement(produtoVenda);
     
-    tTotal.setText("TOTAL");
+    if (!(listaCarrinho.getSize() == 0)) {
+        
+    }
+    
+    atualizarTotal();
 
     jTextArea1.append(produtoVenda.toString() + "\n");
         
@@ -188,8 +204,18 @@ public class Principal extends javax.swing.JFrame {
             listaCarrinho.removeElementAt(
                     jList1.getSelectedIndex()
             );
+         
+         atualizarTotal();
+
     }//GEN-LAST:event_bRemoveActionPerformed
 
+    private void selecaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {
+    tSaldo.setText(Integer.toString(
+        ((Produto) jComboBox1ActionPerformed.getSelectedItem()).getSaldoEstoque())
+    );
+}
+
+    
     /**
      * @param args the command line arguments
      */
@@ -214,8 +240,18 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Principal().setVisible(true));
     }
+    
+    private void atualizarTotal() {
+    double total = 0;
+    for (int i = 0; i < listaCarrinho.size(); i++) {
+        total += listaCarrinho.get(i).getTotal();
+    }
+    tTotal.setText(String.format("R$ %.2f", total));
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Saldo;
     private javax.swing.JButton bAdiciona;
     private javax.swing.JButton bRemove;
     private javax.swing.JComboBox<Produto> jComboBox1;
@@ -224,6 +260,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField tTotal;
     // End of variables declaration//GEN-END:variables
 }

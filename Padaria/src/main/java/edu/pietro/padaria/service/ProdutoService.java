@@ -14,8 +14,11 @@ import edu.pietro.padaria.model.ProdutoEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ProdutoService {
+    
+    private static Random r = new Random();
 
     public static List<Produto> inicializarProdutos() {
         List<Produto> produtos = new ArrayList<>();
@@ -24,8 +27,9 @@ public class ProdutoService {
             produto.setCodigo(item.getCodigo());
             produto.setDescricao(item.getDescricao());
             produto.setPreco(item.getPreco());
+            produto.setSaldoEstoque(r.nextInt(5,20));
             produtos.add(produto);
         }
-        return produtos;
+           return produtos;
     }
 }
