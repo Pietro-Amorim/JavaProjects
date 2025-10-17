@@ -1,4 +1,3 @@
-
 package edu.pietro.padaria.model;
 
 import java.util.Objects;
@@ -8,17 +7,17 @@ public class Produto {
     private int codigo;
     private String descricao;
     private double preco;
-    
-    @Override  public String toString(){
-        return this.codigo +"-"+ this.descricao;
-    }
-  
-    public Produto(){};
+    private int saldoEstoque; // Campo adicionado
+
+    // Construtores
+    public Produto() {}
+
     public Produto(int codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
+    // Getters e Setters
     public int getCodigo() {
         return codigo;
     }
@@ -43,21 +42,31 @@ public class Produto {
         this.preco = preco;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
+    public int getSaldoEstoque() {
+        return saldoEstoque;
     }
 
+    public void setSaldoEstoque(int saldoEstoque) {
+        this.saldoEstoque = saldoEstoque;
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return this.codigo + "-" + this.descricao;
+    }
+
+    // equals e hashCode corrigidos
     @Override
     public boolean equals(Object obj) {
-
-        return this.codigo == ((Produto)obj).codigo;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Produto produto = (Produto) obj;
+        return codigo == produto.codigo;
     }
 
-    public void setSaldoEstoque(int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
     }
-
-    
 }
